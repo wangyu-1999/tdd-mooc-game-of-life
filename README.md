@@ -1,6 +1,6 @@
-# New JavaScript Project
+# Exercise 6: Conway's Game of Life
 
-An empty project with JavaScript testing tools preconfigured. Do whatever you like with it.
+This is the code for Exercise 6 of TDD MOOC
 
 ## Prerequisites
 
