@@ -3,7 +3,7 @@ import { expect } from "chai";
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
 import fs from "fs/promises";
-import { readFile, extractX, extractY } from "../src/readfile.mjs";
+import { readFile, extractX, extractY, extractPattern } from "../src/readfile.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -75,6 +75,12 @@ x = 3, y = 1, rule = B3/S23
         return;
       }
     });
+  });
+
+  test("extractPattern should extract pattern from file", async () => {
+    const result = await readFile(testFilePath);
+    const pattern = extractPattern(result);
+    expect(pattern).to.equal("3o!");
   });
 
   afterEach(async () => {

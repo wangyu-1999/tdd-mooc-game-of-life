@@ -20,3 +20,10 @@ export const extractY = (line) => {
   }
   return null;
 };
+
+export const extractPattern = (fileContent) => {
+  const lines = fileContent.split("\n");
+  return lines[lines.length - 1].trim();
+};
+
+
