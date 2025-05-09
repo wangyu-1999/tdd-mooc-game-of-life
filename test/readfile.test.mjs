@@ -16,6 +16,17 @@ const testContent = `#N Blinker
 x = 3, y = 1, rule = B3/S23
 3o!`;
 
+const testContent2_RLE_line1 = "24bo11b$22bobo11b$12b2o6b2o12b2o$11bo3bo4b2o12b2o$2o8bo5bo3b2o14b$2o8b";
+const testContent2_RLE_line2 = "o3bob2o4bobo11b$10bo5bo7bo11b$11bo3bo20b$12b2o!";
+const testContent2 = `#N Gosper glider gun
+#O Bill Gosper
+#C A true period 30 glider gun.
+#C The first known gun and the first known finite pattern with unbounded growth.
+#C www.conwaylife.com/wiki/index.php?title=Gosper_glider_gun
+x = 36, y = 9, rule = B3/S23
+${testContent2_RLE_line1}
+${testContent2_RLE_line2}`;
+
 describe("readFile tests", () => {
   beforeEach(async () => {
     await fs.writeFile(testFilePath, testContent);
@@ -108,5 +119,15 @@ describe("readFile CLI tests", () => {
     const result = await readFile(testFilePath);
     const pattern = extractPattern(result);
     expect(pattern).to.equal("3o!");
+  });
+});
+
+describe("RLE multi-line content tests", () => {
+  test("extractPattern should extract pattern from file", async () => {
+    await fs.writeFile(testFilePath, testContent2);
+    const result = await readFile(testFilePath);
+    const pattern = extractPattern(result);
+    expect(pattern).to.equal(`${testContent2_RLE_line1}${testContent2_RLE_line2}`);
+    await fs.unlink(testFilePath);
   });
 });

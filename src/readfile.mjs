@@ -23,7 +23,17 @@ export const extractY = (line) => {
 
 export const extractPattern = (fileContent) => {
   const lines = fileContent.split("\n");
-  return lines[lines.length - 1].trim();
+  let res = "";
+  lines.forEach((line) => {
+    if (line.startsWith("#") || line.trim() === "") {
+      return;
+    }
+    if (extractX(line) || extractY(line)) {
+      return;
+    }
+    res += line.trim();
+  });
+  return res;
 };
 
 
