@@ -1,5 +1,12 @@
 export class Board {
   board;
+  minX;
+  maxX;
+  minY;
+  maxY;
+  length;
+  height;
+
   constructor() {
     this.board = new Set();
   }
@@ -20,7 +27,7 @@ export class Board {
     return str.split(",").map(Number);
   }
 
-  getLength() {
+  updateLength() {
     let minX = Infinity;
     let maxX = -Infinity;
     this.board.forEach((str) => {
@@ -32,10 +39,12 @@ export class Board {
         maxX = element[0];
       }
     });
-    return maxX - minX + 1;
+    this.maxX = maxX;
+    this.minX = minX;
+    this.length = maxX - minX + 1;
   }
 
-  getHeight() {
+  updateHeight() {
     let minY = Infinity;
     let maxY = -Infinity;
     this.board.forEach((str) => {
@@ -47,7 +56,9 @@ export class Board {
         maxY = element[1];
       }
     });
-    return maxY - minY + 1;
+    this.maxY = maxY;
+    this.minY = minY;
+    this.height = maxY - minY + 1;
   }
 
   static numberStrToNumber(str) {
@@ -75,6 +86,7 @@ export class Board {
         x += num;
         numStr = "";
       } else if (rleString[i] === "o") {
+        // alive
         const num = this.numberStrToNumber(numStr);
         for (let j = 0; j < num; j++) {
           board.add(x, y);
