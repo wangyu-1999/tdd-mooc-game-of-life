@@ -3,10 +3,8 @@ import { expect } from "chai";
 import { getArgsFromCli } from "../src/cli.mjs";
 
 describe("CLI tests", () => {
-  const originalArgv = [...process.argv];
-
   beforeEach(() => {
-    process.argv = originalArgv;
+    originalArgv = process.argv;
   });
 
   afterEach(() => {
