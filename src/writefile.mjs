@@ -1,7 +1,6 @@
 import fs from "fs/promises";
 import { fileURLToPath } from "url";
 import { dirname, join, resolve } from "path";
-
 export const getInfoLine = (board) => {
   board.updateLength();
   board.updateHeight();
@@ -14,6 +13,7 @@ export const getOutputPath = () => {
   return join(__dirname, "output/output.rle");
 };
 
-export const writeFile = (filePath, str) => {
-  fs.writeFile(filePath, str, "utf-8");
+export const writeFile = async (filePath, str) => {
+  await fs.mkdir(resolve(filePath, "../"), { recursive: true });
+  await fs.writeFile(filePath, str, "utf-8");
 };
