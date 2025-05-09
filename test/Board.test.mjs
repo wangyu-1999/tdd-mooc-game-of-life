@@ -30,4 +30,28 @@ describe("Board tests", () => {
     const vector = board.stringToVector("1,2");
     expect(vector).to.deep.equal([1, 2]);
   });
+
+  test("test getLength function 1", () => {
+    board.add(1, 2);
+    board.add(3, 4);
+    expect(board.getLength()).to.equal(3);
+  });
+
+  test("test getLength function 2", () => {
+    board.add(-1, 2);
+    board.add(4, 4);
+    expect(board.getLength()).to.equal(6);
+  });
+
+  test("test getHeight function 1", () => {
+    board.add(1, 2);
+    board.add(3, 4);
+    expect(board.getHeight()).to.equal(3);
+  });
+
+  test("test getHeight function 2", () => {
+    board.add(-1, -2);
+    board.add(4, 4);
+    expect(board.getHeight()).to.equal(7);
+  });
 });
