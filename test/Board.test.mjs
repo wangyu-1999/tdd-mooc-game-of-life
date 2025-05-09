@@ -55,3 +55,29 @@ describe("Board tests", () => {
     expect(board.getHeight()).to.equal(7);
   });
 });
+
+describe("numberStrToNumber function", () => {
+  test("should return 1 for empty string", () => {
+    expect(Board.numberStrToNumber("")).to.equal(1);
+  });
+
+  test("should return number for valid string 1", () => {
+    expect(Board.numberStrToNumber("5")).to.equal(5);
+  });
+
+  test("should return number for valid string 2", () => {
+    expect(Board.numberStrToNumber("24")).to.equal(24);
+  });
+
+  test("should throw error for invalid string 1", () => {
+    expect(() => Board.numberStrToNumber("24b")).to.throw("Invalid string");
+  });
+
+  test("should throw error for invalid string 2", () => {
+    expect(() => Board.numberStrToNumber("b")).to.throw("Invalid string");
+  });
+
+  test("should throw error for invalid string 3", () => {
+    expect(() => Board.numberStrToNumber("$")).to.throw("Invalid string");
+  });
+});

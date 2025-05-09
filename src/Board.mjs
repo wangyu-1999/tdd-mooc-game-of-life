@@ -49,4 +49,13 @@ export class Board {
     });
     return maxY - minY + 1;
   }
-}
+  static numberStrToNumber(str) {
+    if (str === "") {
+      return 1;
+    }
+    if (str.match(/^[0-9]+$/) && !isNaN(parseInt(str))) {
+      return parseInt(str);
+    } else {
+      throw new Error("Invalid string");
+    }
+  }
