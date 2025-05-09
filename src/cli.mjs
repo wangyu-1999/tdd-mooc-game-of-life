@@ -8,7 +8,7 @@ export const getArgsFromCli = () => {
   if (typeOfFile !== "rle") {
     throw new Error("the file type is not correct");
   }
-  if (isNaN(iter) || iter <= 0) {
+  if (isNaN(iter) || iter < 0) {
     throw new Error("the iter parameter is not correct");
   }
   return {
