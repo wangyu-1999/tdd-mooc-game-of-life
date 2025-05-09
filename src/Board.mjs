@@ -109,4 +109,23 @@ export class Board {
     }
     return board;
   }
+
+  toString() {
+    this.updateHeight();
+    this.updateLength();
+    let str = "";
+    for (let j = 0; j < this.height; j++) {
+      let y = this.minY + j;
+      for (let i = 0; i < this.length; i++) {
+        let x = this.minX + i;
+        if (this.has(x, y)) {
+          str += "X";
+        } else {
+          str += ".";
+        }
+      }
+      str += "\n";
+    }
+    return str;
+  }
 }

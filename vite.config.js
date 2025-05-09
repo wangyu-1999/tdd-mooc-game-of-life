@@ -1,2 +1,6 @@
 /** @type {import("vite").UserConfig} */
-export default {};
+export default {
+  test: {
+    setupFiles: ["test/testing.mjs"],
+  },
+};

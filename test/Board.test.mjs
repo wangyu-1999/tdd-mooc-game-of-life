@@ -26,6 +26,16 @@ describe("Board tests", () => {
     expect(board.board.size).to.equal(1);
   });
 
+  test("board should remove a cell 2", () => {
+    board.add(1, 2);
+    board.add(3, 4);
+    board.add(5, 6);
+    board.remove(1, 2);
+    expect(board.has(1, 2)).to.be.false;
+    expect(board.has(3, 4)).to.be.true;
+    expect(board.board.size).to.equal(2);
+  });
+
   test("test stringToVector function", () => {
     const vector = board.stringToVector("1,2");
     expect(vector).to.deep.equal([1, 2]);
@@ -35,6 +45,8 @@ describe("Board tests", () => {
     board.add(1, 2);
     board.add(3, 4);
     board.updateLength();
+    expect(board.minX).to.equal(1);
+    expect(board.maxX).to.equal(3);
     expect(board.length).to.equal(3);
   });
 
@@ -42,6 +54,8 @@ describe("Board tests", () => {
     board.add(-1, 2);
     board.add(4, 4);
     board.updateLength();
+    expect(board.minX).to.equal(-1);
+    expect(board.maxX).to.equal(4);
     expect(board.length).to.equal(6);
   });
 
@@ -49,6 +63,8 @@ describe("Board tests", () => {
     board.add(1, 2);
     board.add(3, 4);
     board.updateHeight();
+    expect(board.minY).to.equal(2);
+    expect(board.maxY).to.equal(4);
     expect(board.height).to.equal(3);
   });
 
@@ -56,6 +72,8 @@ describe("Board tests", () => {
     board.add(-1, -2);
     board.add(4, 4);
     board.updateHeight();
+    expect(board.minY).to.equal(-2);
+    expect(board.maxY).to.equal(4);
     expect(board.height).to.equal(7);
   });
 });
@@ -83,5 +101,53 @@ describe("numberStrToNumber function", () => {
 
   test("should throw error for invalid string 3", () => {
     expect(() => Board.numberStrToNumber("$")).to.throw("Invalid string");
+  });
+});
+
+describe("toString function", () => {
+  let board;
+  beforeEach(() => {
+    board = new Board();
+  });
+  test("should return empty string for empty board", () => {
+    expect(board.toString()).to.equal("");
+  });
+  test("blinker", () => {
+    const blinker = Board.getBoardFromRLEString("3o!");
+    expect(blinker.toString()).to.equalShape(`XXX`);
+  });
+  test("block", () => {
+    const block = Board.getBoardFromRLEString("2o$2o!");
+    expect(block.toString()).to.equalShape(
+      `XX
+       XX`,
+    );
+  });
+  test("glider", () => {
+    const glider = Board.getBoardFromRLEString("bob$2bo$3o!");
+    expect(glider.toString()).to.equalShape(
+      `.X.
+       ..X
+       XXX`,
+    );
+  });
+
+  test("myboard 1", () => {
+    const myboard = Board.getBoardFromRLEString("2bo$bobo$b3o$obobo!");
+    expect(myboard.toString()).to.equalShape(
+      `..X..
+       .X.X.
+       .XXX.
+       X.X.X`,
+    );
+  });
+
+  test("myboard 2", () => {
+    const myboard = Board.getBoardFromRLEString("o2bo2bo$2bobo$o2bo2bo!");
+    expect(myboard.toString()).to.equalShape(
+      `X..X..X
+       ..X.X..
+       X..X..X`,
+    );
   });
 });
