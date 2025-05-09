@@ -29,8 +29,18 @@ describe("CLI tests", () => {
     expect(() => getArgsFromCli()).to.throw("the file type is not correct");
   });
 
-  test("getArgsFromCli should throw an error if the iter parameter is not correct", () => {
+  test("getArgsFromCli should throw an error if the iter parameter is not correct 1", () => {
     process.argv = ["node", "cli.mjs", "source/blinker.rle", "-5"];
+    expect(() => getArgsFromCli()).to.throw("the iter parameter is not correct");
+  });
+
+  test("getArgsFromCli should throw an error if the iter parameter is not correct 2", () => {
+    process.argv = ["node", "cli.mjs", "source/blinker.rle", "5.3"];
+    expect(() => getArgsFromCli()).to.throw("the iter parameter is not correct");
+  });
+
+  test("getArgsFromCli should throw an error if the iter parameter is not correct 3", () => {
+    process.argv = ["node", "cli.mjs", "source/blinker.rle", 5];
     expect(() => getArgsFromCli()).to.throw("the iter parameter is not correct");
   });
 });

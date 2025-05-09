@@ -112,7 +112,7 @@ describe("readFile CLI tests", () => {
     await fs.unlink(testFilePath);
   });
   test("readFile should work with CLI arguments", async () => {
-    process.argv = ["node", "cli.mjs", testFilePath, 5];
+    process.argv = ["node", "cli.mjs", testFilePath, "5"];
     const { path, iter } = getArgsFromCli();
     expect(path).to.equal(testFilePath);
     expect(iter).to.equal(5);
