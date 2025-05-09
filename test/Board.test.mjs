@@ -151,3 +151,68 @@ describe("toString function", () => {
     );
   });
 });
+
+describe("tick function", () => {
+  test("blinker", () => {
+    const blinker = Board.getBoardFromRLEString("3o!");
+    blinker.tick();
+    expect(blinker.toString()).to.equalShape(
+      `X
+       X
+       X`,
+    );
+  });
+
+  test("blinker 2", () => {
+    const blinker = Board.getBoardFromRLEString("3o!");
+    blinker.tick();
+    blinker.tick();
+    expect(blinker.toString()).to.equalShape(`XXX`);
+  });
+
+  test("block", () => {
+    const block = Board.getBoardFromRLEString("2o$2o!");
+    block.tick();
+    expect(block.toString()).to.equalShape(
+      `XX
+       XX`,
+    );
+  });
+
+  test("glider", () => {
+    const glider = Board.getBoardFromRLEString("bob$2bo$3o!");
+    glider.tick();
+    expect(glider.toString()).to.equalShape(
+      `X.X
+       .XX
+       .X.`,
+    );
+  });
+
+  test("myboard 1", () => {
+    const myboard = Board.getBoardFromRLEString("2bo$bobo$b3o$obobo!");
+    myboard.tick();
+    expect(myboard.toString()).to.equalShape(
+      `..X..
+       .X.X.
+       X...X
+       ..X..`,
+    );
+  });
+
+  test("myboard 2", () => {
+    const myboard = Board.getBoardFromRLEString("o2bo2bo$2bobo$o2bo2bo!");
+    myboard.tick();
+    expect(myboard.toString()).to.equalShape(
+      `..X..
+       XX.XX
+       ..X..`,
+    );
+    myboard.tick();
+    expect(myboard.toString()).to.equalShape(
+      `XXX
+       X.X
+       XXX`,
+    );
+  });
+});

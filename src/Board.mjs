@@ -128,4 +128,38 @@ export class Board {
     }
     return str;
   }
+
+  tick() {
+    this.updateHeight();
+    this.updateLength();
+    const newBoard = new Board();
+    for (let i = this.minX - 1; i <= this.maxX + 1; i++) {
+      for (let j = this.minY - 1; j <= this.maxY + 1; j++) {
+        let neighbors = 0;
+        for (let x = i - 1; x <= i + 1; x++) {
+          for (let y = j - 1; y <= j + 1; y++) {
+            if (x === i && y === j) {
+              continue;
+            }
+            if (this.has(x, y)) {
+              neighbors++;
+            }
+          }
+        }
+        // born
+        if (neighbors === 3) {
+          newBoard.add(i, j);
+        }
+        // die
+        if (neighbors < 2 || neighbors > 3) {
+          newBoard.remove(i, j);
+        }
+        // survive
+        if (neighbors === 2 && this.has(i, j)) {
+          newBoard.add(i, j);
+        }
+      }
+    }
+    this.board = newBoard.board;
+  }
 }
