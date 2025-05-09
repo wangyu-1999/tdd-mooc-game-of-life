@@ -162,4 +162,72 @@ export class Board {
     }
     this.board = newBoard.board;
   }
+
+  boardToRLEString() {
+    this.updateHeight();
+    this.updateLength();
+    let rleString = "";
+    let count = 0;
+    let lastChar = "";
+    let lineCount = 0;
+
+    for (let j = this.minY; j <= this.maxY; j++) {
+      for (let i = this.minX; i <= this.maxX; i++) {
+        const cell = this.has(i, j);
+        if (cell) {
+          if (lineCount !== 0) {
+            if (lineCount !== 1) {
+              rleString += lineCount;
+            }
+            rleString += "$";
+            lineCount = 0;
+          }
+          if (lastChar === "o" || lastChar === "") {
+            count++;
+            lastChar = "o";
+          } else {
+            if (count > 0) {
+              if (count !== 1) {
+                rleString += count;
+              }
+              rleString += lastChar;
+              count = 1;
+              lastChar = "o";
+            }
+          }
+        } else {
+          if (lastChar === "b" || lastChar === "") {
+            count++;
+            lastChar = "b";
+          } else {
+            if (count > 0) {
+              if (count !== 1) {
+                rleString += count;
+              }
+              rleString += lastChar;
+              count = 1;
+              lastChar = "b";
+            }
+          }
+        }
+      }
+      if (lastChar === "b" && count === this.length) {
+        count = 0;
+        lastChar = "";
+      } else {
+        if (!(j === this.maxY && lastChar === "b")) {
+          if (count > 0) {
+            if (count !== 1) {
+              rleString += count;
+            }
+            rleString += lastChar;
+            count = 0;
+            lastChar = "";
+          }
+        }
+      }
+      lineCount++;
+    }
+    return rleString + "!";
+  }
 }

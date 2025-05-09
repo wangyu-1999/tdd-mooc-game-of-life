@@ -150,6 +150,17 @@ describe("toString function", () => {
        X..X..X`,
     );
   });
+
+  test("myboard 3", () => {
+    const myboard = Board.getBoardFromRLEString("2o3$2o$bo!");
+    expect(myboard.toString()).to.equalShape(
+      `XX
+       ..
+       ..
+       XX
+       .X`,
+    );
+  });
 });
 
 describe("tick function", () => {
@@ -213,6 +224,33 @@ describe("tick function", () => {
       `XXX
        X.X
        XXX`,
+    );
+  });
+});
+
+describe("boardToRLEString function", () => {
+  test("blinker", () => {
+    const blinker = Board.getBoardFromRLEString("3o!");
+    expect(blinker.boardToRLEString()).to.equal("3o!");
+  });
+  test("block", () => {
+    const block = Board.getBoardFromRLEString("2o$2o!");
+    expect(block.boardToRLEString()).to.equal("2o$2o!");
+  });
+  test("glider", () => {
+    const glider = Board.getBoardFromRLEString("bob$2bo$3o!");
+    expect(glider.boardToRLEString()).to.equal("bob$2bo$3o!");
+  });
+  test("myboard 1", () => {
+    const myboard = Board.getBoardFromRLEString("2o3$bo$bo!");
+    expect(myboard.boardToRLEString()).to.equal("2o3$bo$bo!");
+  });
+  test("gosperglidergun", () => {
+    const board = Board.getBoardFromRLEString(
+      "24bo11b$22bobo11b$12b2o6b2o12b2o$11bo3bo4b2o12b2o$2o8bo5bo3b2o14b$2o8bo3bob2o4bobo11b$10bo5bo7bo11b$11bo3bo20b$12b2o!",
+    );
+    expect(board.boardToRLEString()).to.equal(
+      "24bo11b$22bobo11b$12b2o6b2o12b2o$11bo3bo4b2o12b2o$2o8bo5bo3b2o14b$2o8bo3bob2o4bobo11b$10bo5bo7bo11b$11bo3bo20b$12b2o!",
     );
   });
 });
