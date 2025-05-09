@@ -15,4 +15,7 @@ export class Board {
   remove(x, y) {
     this.board.delete(`${x},${y}`);
   }
-}
+
+  stringToVector(str) {
+    return str.split(",").map(Number);
+  }

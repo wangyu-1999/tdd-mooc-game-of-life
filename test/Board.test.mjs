@@ -25,4 +25,9 @@ describe("Board tests", () => {
     expect(board.has(3, 4)).to.be.true;
     expect(board.board.size).to.equal(1);
   });
+
+  test("test stringToVector function", () => {
+    const vector = board.stringToVector("1,2");
+    expect(vector).to.deep.equal([1, 2]);
+  });
 });
