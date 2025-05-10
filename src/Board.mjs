@@ -215,16 +215,16 @@ export class Board {
         count = 0;
         lastChar = "";
       } else {
-        if (!(j === this.maxY && lastChar === "b")) {
+        if (!(lastChar === "b")) {
           if (count > 0) {
             if (count !== 1) {
               rleString += count;
             }
             rleString += lastChar;
-            count = 0;
-            lastChar = "";
           }
         }
+        count = 0;
+        lastChar = "";
       }
       lineCount++;
     }
