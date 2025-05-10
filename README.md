@@ -4,11 +4,11 @@ This is the code for Exercise 6 of TDD MOOC
 
 ## How to run
 
-run 'node src/main.js <input file path> <iterations>'
+run 'node index.js <input file path> <iterations>'
 
 For example:
 
-node src/main.mjs source/glider.rle 4
+node index.js source/glider.rle 4
 
 ## Youtube video link
 
