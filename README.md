@@ -2,22 +2,14 @@
 
 This is the code for Exercise 6 of TDD MOOC
 
-## Prerequisites
+## How to run
 
-You'll need a recent [Node.js](https://nodejs.org/) version. Then download this project's dependencies with:
+run 'node src/main.js <input file path> <iterations>'
 
-    npm install
+For example:
 
-## Developing
+node src/main.mjs source/glider.rle 4
 
-Run tests once
+## Youtube video link
 
-    npm run test
-
-Run tests continuously
-
-    npm run autotest
-
-Code reformat
-
-    npm run format
+Todo
